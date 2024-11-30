@@ -31,10 +31,24 @@ public class Attendance {
         this.date = dateFromString(date);
     }
     private LocalDateTime dateFromString(String string){
+        if(string.contains("T")){
+            if(string.length()<16) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dateTime = LocalDateTime.parse(string, formatter);
+                return dateTime;
+            }else{
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(string, formatter);
+                return dateTime;
+            }
+        }else{
+            DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse(string , formatter);
+            return dateTime;
+        }
 
-        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(string , formatter);
-        return dateTime;
+
+
     }
     public Attendance() {
     }
@@ -71,8 +85,9 @@ public class Attendance {
         this.workedHours = workedHours;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setStringDate(String date) {
+
+        this.date = dateFromString(date);
     }
 
     @Override

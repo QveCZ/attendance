@@ -7,6 +7,24 @@
 <body>
 <header>
     <h1 th:text="${welcomeString}"> Welcome in the Hell</h1>
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li>
+                <a th:href="@{/present}">Find all present employ</a>
+            </li>
+            <li>
+                <a th:href="@{/byDate}">Find attendance by date</a>
+            </li>
+            <li>
+                <a href="/add-attendance" th:href="@{/add-attendance}">Add new present</a>
+            </li>
+
+
+        </ul>
+    </nav>
     <table>
         <thead>
         <tr>
@@ -14,6 +32,8 @@
             <th>Is present</th>
             <th>Worked hours</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -22,15 +42,26 @@
             <td th:text="${attendance.isPresent()}"></td>
             <td th:text="${attendance.getWorkedHours()}"></td>
             <td th:text="${attendance.getDate()}"></td>
+
             <td>
                 <!--                <a th:href="|/bird-details/${bird.id}|">View details</a>-->
-                <a th:href="@{/bird-details/{attendance}(attendance=${attendance.id})}">View details</a>
+                <a th:href="@{/attendance-detail/{attendance}(attendance=${attendance.id})}">View details</a>
+            </td>
+            <td>
+                <form method="get" th:action="@{/edit-attendance/{id} (id = ${attendance.id})}">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{/delete/{id} (id = ${attendance.id})}">
+                    <button type="submit">Remove</button>
+                </form>
             </td>
         </tr>
 
         </tbody>
     </table>
-    <a href="/add-attendance" th:href="@{/add-attendance}">Add new present</a>
+
 </header>
 </body>
 </html>
