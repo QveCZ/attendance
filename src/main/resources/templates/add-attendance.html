@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Add present</title>
+</head>
+<body>
+<main>
+    <form th:action="@{/add-attendance}" method="post">
+        <div>
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name">
+        </div>
+        <div>
+            <label for="isPresent">is present: </label>
+            <input id="isPresent" type="checkbox" name="isPresent">
+        </div>
+        <div>
+            <label for="workedHours">workedHours: </label>
+            <input id="workedHours" type="number" name="workedHours" min="0" max="24">
+        </div>
+        <div>
+            <label for="date">Date: </label>
+            <input id="date" type="text" name="date">
+        </div>
+        <button type="submit">Add present</button>
+    </form>
+</main>
+</body>
+</html>
