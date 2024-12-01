@@ -5,6 +5,8 @@ import cz.qve.attendance.repositories.AttendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +53,19 @@ public class AttendImpl implements AttendService {
     public List<Attendance> getIsPresent() {
 
         return attendRepository.findAllisPresent();
+    }
+
+    @Override
+    public List<Attendance> getAttendancesByName(String name) {
+        return attendRepository.findAttendanceByNameContainsIgnoreCase(name);
+    }
+
+    @Override
+    public List<Attendance> getAttendancesByDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date + " 00:00:00", formatter);
+        LocalDateTime dateTime2 = LocalDateTime.parse(date + " 23:59:59", formatter);
+        return attendRepository.findAttendanceByDate(dateTime,dateTime2);
     }
 
 }

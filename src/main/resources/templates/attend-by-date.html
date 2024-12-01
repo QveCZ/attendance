@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <title>Present</title>
+    <title>Attend by date</title>
 </head>
 <body>
-<nav>
-    <ul>
-        <li>
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li>
-            <a th:href="@{/byDate}">Find attendance by date</a>
-        </li>
-    </ul>
-</nav>
+<h5>Search</h5>
+<form th:action="@{/attend-by-date}" method="get">
+    <input type="date" name="search">
+    <button type="submit">Search</button>
+</form>
 <table>
     <thead>
     <tr>
@@ -23,7 +18,8 @@
         <th>Is present</th>
         <th>Worked hours</th>
         <th>Date</th>
-        <th>Details</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -37,7 +33,16 @@
             <!--                <a th:href="|/bird-details/${bird.id}|">View details</a>-->
             <a th:href="@{/attendance-detail/{attendance}(attendance=${attendance.id})}">View details</a>
         </td>
-
+        <td>
+            <form method="get" th:action="@{/edit-attendance/{id} (id = ${attendance.id})}">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form method="get" th:action="@{/delete/{id} (id = ${attendance.id})}">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
     </tr>
 
     </tbody>

@@ -32,9 +32,9 @@ public class Attendance {
     }
     private LocalDateTime dateFromString(String string){
         if(string.contains("T")){
-            if(string.length()<16) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dateTime = LocalDateTime.parse(string, formatter);
+            if(string.length()<17) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(string+":01", formatter);
                 return dateTime;
             }else{
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Controller
@@ -25,11 +26,11 @@ public class MainController {
     @GetMapping("/")
     public String getMainPage(Model model, @RequestParam(value = "search", required = false) String search) {
         model.addAttribute("welcomeString", "Welcome to the Hell Attendance");
-        //if(Objects.nonNull(search)){
-       //     model.addAttribute("birds", attendService.getBirdsByName(search));
-       // } else {
+        if(Objects.nonNull(search)){
+            model.addAttribute("attendances", attendService.getAttendancesByName(search));
+        } else {
             model.addAttribute("attendances", attendService.getAttendances());
-       // }
+        }
         return "index";
     }
     @GetMapping("/add-attendance")
@@ -83,5 +84,18 @@ public class MainController {
         model.addAttribute("attendances", attendService.getIsPresent());
         return "present";
     }
+
+    @GetMapping("/attend-by-date")
+    public String searchAttendByDate(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("welcomeString", "Welcome to the Hell Attendance");
+        if(Objects.nonNull(search)){
+            model.addAttribute("attendances", attendService.getAttendancesByDate(search));
+        } else {
+            model.addAttribute("attendances", attendService.getAttendances());
+        }
+        return "attend-by-date";
+    }
+
+
 
 }

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8" >
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Attendance</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
                 <a th:href="@{/present}">Find all present employ</a>
             </li>
             <li>
-                <a th:href="@{/byDate}">Find attendance by date</a>
+                <a th:href="@{/attend-by-date}">Find attendance by date</a>
             </li>
             <li>
                 <a href="/add-attendance" th:href="@{/add-attendance}">Add new present</a>
@@ -25,12 +26,18 @@
 
         </ul>
     </nav>
+    <h5>Search</h5>
+    <form th:action="@{/}" method="get">
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+    </form>
     <table>
         <thead>
         <tr>
             <th>Name</th>
             <th>Is present</th>
             <th>Worked hours</th>
+            <th>Details</th>
             <th>Date</th>
             <th>Edit</th>
             <th>Delete</th>

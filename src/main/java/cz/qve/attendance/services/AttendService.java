@@ -17,6 +17,10 @@ public interface AttendService {
 
     List<Attendance> getIsPresent();
 
+    List<Attendance> getAttendancesByName(String name);
+
+    List<Attendance> getAttendancesByDate(String date);
+
 
 
 }
